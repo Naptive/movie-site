@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,7 +13,7 @@
     "firebase": "^10.4.0",
     "framer-motion": "^10.17.9",
     "lucide-react": "^0.308.0",
-    "next": "latest",
+    "next": "^14.0.4",
     "react": "latest",
     "react-dom": "latest",
     "sharp": "^0.33.2",
