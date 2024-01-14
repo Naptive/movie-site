@@ -90,7 +90,8 @@ function MoviePage() {
       }
     };
     unsubscribe();
-  }, [movieInfo?.title]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const checkIfLiked = async () => {
     const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
