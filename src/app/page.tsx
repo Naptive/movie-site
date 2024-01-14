@@ -18,32 +18,14 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<string>("myFirstId");
   const [carousel, setCarousel] = useState<Movie[]>([]);
 
-  const item: any = () => {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth >= 770;
-    } else {
-      return false;
-    }
-  }
-
   return (
     <main className="min-h-screen overflow-x-hidden pb-20 md:px-7">
-      <title>Wiliam || Latest For You</title>
+      <title>William || Latest For You</title>
       <OverviewCarousel carousel={carousel} />
 
-      {item && (
-        <section
-          id="ContinueWatching"
-          className="relative -top-7 pl-[12px] bg-black max-w-screen"
-        >
-          <Label title={"Continue Watching"} />
-          <div className="w-full flex gap-[12px] h-[334px] overflow-x-scroll overflow-y-hidden no-scrollbar">
-            <HistorySection />
-          </div>
-        </section>
-      )}
+      <HistorySection />
 
-      <section className="px-[12px]">
+      <section className="px-3">
         <div className="md:flex justify-start items-center gap-5">
           <Label title={"Recommended"} chevron={false} />
           <AnimatedTab

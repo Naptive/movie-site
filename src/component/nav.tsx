@@ -1,5 +1,6 @@
 "use client";
-import { ArrowLeft, Search, UploadCloud, User, UserRound } from "lucide-react";
+import { Button, Spacer } from "@nextui-org/react";
+import { ArrowLeft, Search, Space, UploadCloud, User } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
@@ -7,61 +8,50 @@ function Nav() {
   const router = useRouter();
   const path = usePathname();
 
-  const getWindowWidth = (): boolean => {
-    if (typeof window !== "undefined" && window.localStorage) {
-      return window.innerWidth > 770;
-    } else {
-      return false;
-    }
-  };
-
-  const windowWidth: boolean = getWindowWidth();
-
   if (path === "/search") {
     return null;
   }
 
-  return windowWidth ? (
-    <header className="fixed top-0 z-40 left-0 right-0 h-[54px] px-7 bg-black">
-      <nav className="w-full h-full flex items-center justify-start">
+  return (
+    <header className="md:fixed absolute top-0 z-40 left-0 right-0 px-[22px] md:px-7 py-2 md:py-3 bg-transparent md:bg-black/60 md:backdrop-blur md:backdrop-saturate-150 ">
+      <nav className="w-full h-full flex items-center justify-between gap-3 dark">
         {path === "/" ? (
-          <h1 className="text-[20px] font-medium">William</h1>
+          <h1 onClick={() => router.refresh()} className="hidden md:block text-xl cursor-pointer">William</h1>
         ) : (
-          <>
-            <button
-              onClick={() => router.back()}
-              className="z-30 w-[40px] h-[40px] bg-white rounded-xl flex justify-center items-center"
-            >
-              <ArrowLeft color="black" size={windowWidth ? "20px" : "24px"} />
-            </button>
-          </>
+          <button
+            onClick={() => router.back()}
+            className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
+          >
+            <ArrowLeft />
+          </button>
         )}
-
-        <div className="absolute z-30 top-[15px] md:top-[7px] md:right-[28px] right-[15px] gap-3 flex">
-          <button
-            onClick={() => router.push("upload-any-film")}
-            className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-white rounded-xl flex justify-center items-center"
-          >
-            <UploadCloud color="black" size={windowWidth ? "20px" : "24px"} />
-          </button>
-
-          <button
-            onClick={() => router.push("search")}
-            className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-white rounded-xl flex justify-center items-center"
-          >
-            <Search color="black" size={windowWidth ? "20px" : "24px"} />
-          </button>
-
-          <button
-            onClick={() => router.push("account")}
-            className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-white rounded-xl flex justify-center items-center"
-          >
-            <User color="black" size={windowWidth ? "20px" : "24px"} />
-          </button>
-        </div>
+        <Spacer />
+        {!(path === "/account" || path === "/sign-in" || path === "/sign-up") && (
+          <div className="flex gap-3">
+            {" "}
+            <button
+              onClick={() => router.push("upload-any-film")}
+              className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
+            >
+              <UploadCloud className="md:text-xl text-2xl" />
+            </button>
+            <button
+              onClick={() => router.push("search")}
+              className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
+            >
+              <Search className="md:text-xl text-2xl" />
+            </button>
+            <button
+              onClick={() => router.push("account")}
+              className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
+            >
+              <User className="md:text-xl text-2xl" />
+            </button>
+          </div>
+        )}
       </nav>
     </header>
-  ) : null;
+  );
 }
 
 export default Nav;

@@ -9,10 +9,11 @@ import { useRouter } from "next/navigation";
     random: any,
     resolution: any,
     rating: any,
-    runtime: any
+    runtime: any,
+    backdrop: string
  }
 
-export default function CarouselCard({img, title, sortMemo, resolution, rating, runtime}: Info) {
+export default function CarouselCard({img, title, sortMemo, resolution, rating, runtime, backdrop}: Info) {
     const router = useRouter();
   return (
     <Card isFooterBlurred className="min-w-1/3 w-1/3 h-[300px] col-span-12 sm:col-span-7 hidden md:block">
@@ -24,7 +25,7 @@ export default function CarouselCard({img, title, sortMemo, resolution, rating, 
         removeWrapper
         alt={title}
         className="z-0 w-full h-full object-cover backdrop:brightness-90"
-        src={`https://image.tmdb.org/t/p/w500${img}` || ''}
+        src={`https://image.tmdb.org/t/p/w1280${backdrop}` || ''}
       />
       <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
         <div className="flex flex-grow gap-2 items-center">
@@ -32,9 +33,7 @@ export default function CarouselCard({img, title, sortMemo, resolution, rating, 
             <p className="text-tiny text-white/60 line-clamp-2 pr-2">{sortMemo}</p>
             <div className="h-[29px] w-min text-[13px] gap-2 flex items-center justify-center text-tiny text-white/60">
                 <p>
-                  {resolution === "720p" && "sd"}
-                  {resolution === "1080p" && "hd"}
-                  {resolution === "2160p" && "UHD"}
+                  {resolution}
                 </p>
                 <p>{rating.toFixed(1) || "N/A"}</p>
                 <p>{runtime || "N/A"}</p>

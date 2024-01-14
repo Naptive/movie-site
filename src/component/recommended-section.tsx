@@ -77,9 +77,7 @@ function RecommendedSection({ setCarousel }: any) {
           <h6
             className={`bg-white absolute top-2 left-2 text-black rounded-md px-2 text-[11px] py-[1px]`}
           >
-            {data.resolution === "720p" && "sd"}
-            {data.resolution === "1080p" && "hd"}
-            {data.resolution === "2160p" && "UHD"}
+            {data.resolution}
           </h6>
           <Image
             quality={80}

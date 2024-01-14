@@ -45,12 +45,6 @@ function SignUp() {
 
   return (
     <main className="h-screen dark">
-      <button
-        onClick={() => router.back()}
-        className="w-[50px] z-20 h-[50px] bg-white rounded-xl absolute top-[15px] left-[15px] flex justify-center items-center"
-      >
-        <ArrowLeft color="black" />
-      </button>
 
       <section className="w-full md:w-[400px] space-y-5 absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flex justify-center flex-col p-7">
         <Input

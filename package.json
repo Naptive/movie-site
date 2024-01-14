@@ -10,13 +10,14 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
-    "axios": "^1.5.1",
     "firebase": "^10.4.0",
     "framer-motion": "^10.17.9",
     "lucide-react": "^0.308.0",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "sharp": "^0.33.2",
+    "web-vitals": "^3.5.1"
   },
   "devDependencies": {
     "@types/node": "latest",
