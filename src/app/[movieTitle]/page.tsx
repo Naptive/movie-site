@@ -58,7 +58,8 @@ function MoviePage() {
   const callToFetch = async () => {
     const docRef = doc(db, "movies", val);
     const docSnap: any = await getDoc(docRef);
-
+    console.log('hello from callToFetch');
+    
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
       setMovieInfo(docSnap.data());
@@ -77,6 +78,8 @@ function MoviePage() {
     const unsubscribe = async () => {
       const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
       const docSnap = await getDoc(docRef);
+      console.log('hello from unsubscribe');
+      
 
       if (docSnap.exists()) {
         const likedMovies = docSnap.data().likedMovies;
@@ -96,7 +99,8 @@ function MoviePage() {
   const checkIfLiked = async () => {
     const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
     const docSnap = await getDoc(docRef);
-
+    console.log('run check');
+    
     if (docSnap.exists()) {
       const likedMovies = docSnap.data().likedMovies;
       const isMovieLiked = likedMovies.includes(movieInfo?.title);
@@ -150,7 +154,7 @@ function MoviePage() {
 
   return (
     <main className="min-h-screen flex relative pb-4 pt-[75px] gap-3 px-3 md:px-8">
-      <title>{`William || ${val}`}</title>
+      <title>{`WilliamFlix || ${val}`}</title>
 
       <aside className="w-full flex flex-col md:flex-1">
         <Card className="py-4 dark px-3 md:h-[78vh]">
@@ -254,7 +258,7 @@ function MoviePage() {
             <Tab key="comment" title="Comment">
               <Card style={{ maxWidth: "max-content" }}>
                 <CardBody>
-                  <Input
+                  {/* <Input
                     size="sm"
                     type="text"
                     placeholder="Say Something..."
@@ -262,7 +266,7 @@ function MoviePage() {
                       <MessageSquareMore color="#838383" size={20} />
                     }
                     onChange={(e) => {}}
-                  />
+                  /> */}
                 </CardBody>
               </Card>
             </Tab>
