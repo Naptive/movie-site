@@ -3,7 +3,6 @@ import {
   AlertCircle,
   Bookmark,
   Download,
-  MessageSquareMore,
   Share2,
   ThumbsDown,
   ThumbsUp,
@@ -87,14 +86,13 @@ function MoviePage() {
 
         if (isMovieLiked) {
           const button: any = document.getElementById("like");
-          button.querySelector("svg").setAttribute("fill", "red");
-          button.style.color = "red";
+          button.querySelector("svg").setAttribute("fill", "white");
+          button.style.color = "white";
         }
       }
     };
     unsubscribe();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const checkIfLiked = async () => {
     const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
@@ -114,10 +112,58 @@ function MoviePage() {
         }).then(() => console.log("removed from db"));
       } else {
         const button: any = document.getElementById("like");
-        button.querySelector("svg").setAttribute("fill", "red");
-        button.style.color = "red";
+        button.querySelector("svg").setAttribute("fill", "white");
+        button.style.color = "white";
         await updateDoc(docRef, {
           likedMovies: arrayUnion(movieInfo?.title),
+        }).then(() => console.log("added like to database"));
+      }
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = async () => {
+      const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
+      const docSnap = await getDoc(docRef);
+      console.log('hello from unsubscribe');
+      
+
+      if (docSnap.exists()) {
+        const dislikedMovies = docSnap.data().dislikedMovies;
+        const isMovieLiked = dislikedMovies.includes(movieInfo?.title);
+
+        if (isMovieLiked) {
+          const button: any = document.getElementById("dislike");
+          button.querySelector("svg").setAttribute("fill", "white");
+          button.style.color = "white";
+        }
+      }
+    };
+    unsubscribe();
+  });
+
+  const checkIfDisliked = async () => {
+    const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
+    const docSnap = await getDoc(docRef);
+    console.log('run check');
+    
+    if (docSnap.exists()) {
+      const dislikedMovies = docSnap.data().dislikedMovies;
+      const isMovieLiked = dislikedMovies.includes(movieInfo?.title);
+
+      if (isMovieLiked) {
+        const button: any = document.getElementById("dislike");
+        button.querySelector("svg").setAttribute("fill", "transparent");
+        button.style.color = "white";
+        await updateDoc(docRef, {
+          dislikedMovies: arrayRemove(movieInfo?.title),
+        }).then(() => console.log("removed from db"));
+      } else {
+        const button: any = document.getElementById("dislike");
+        button.querySelector("svg").setAttribute("fill", "white");
+        button.style.color = "white";
+        await updateDoc(docRef, {
+          dislikedMovies: arrayUnion(movieInfo?.title),
         }).then(() => console.log("added like to database"));
       }
     }
@@ -181,7 +227,7 @@ function MoviePage() {
 
         <button
           id="dislike"
-          onClick={() => {}}
+          onClick={() => checkIfDisliked()}
           className="w-min h-min"
         >
           <ThumbsDown size={20}/>
@@ -205,7 +251,13 @@ function MoviePage() {
 
         <button
           id="Share"
-          onClick={() => {}}
+          onClick={() => {
+            navigator.share({
+              title: movieInfo.title,
+              text: movieInfo.overview,
+              url: `https://www.williamflix.netlify.app${pathName}`,
+            });
+          }}
           className="w-min h-min"
         >
           <Share2 size={20}/>
