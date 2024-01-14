@@ -8,7 +8,6 @@ import {
   ThumbsDown,
   ThumbsUp,
 } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
@@ -27,6 +26,7 @@ import {
   CardHeader,
   Image,
   Input,
+  Spinner,
   Tab,
   Tabs,
 } from "@nextui-org/react";
@@ -90,7 +90,7 @@ function MoviePage() {
       }
     };
     unsubscribe();
-  });
+  }, [movieInfo?.title]);
 
   const checkIfLiked = async () => {
     const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
@@ -119,7 +119,9 @@ function MoviePage() {
   };
 
   if (!movieInfo) {
-    return (<div></div>);
+    return (<main className=" min-h-screen z-50 bg-black min-w-screen flex items-center justify-center">
+    <Spinner className="z-50"/>
+   </main>);
   }
 
   const dat = [
