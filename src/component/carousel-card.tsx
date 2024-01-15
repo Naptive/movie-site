@@ -3,7 +3,6 @@ import React from "react";
 import {Card, CardFooter, Image, Button, CardHeader} from "@nextui-org/react";
 import { useRouter } from "next/navigation";
  interface Info {
-    img: string,
     title: string,
     sortMemo: string,
     random: any,
@@ -13,7 +12,7 @@ import { useRouter } from "next/navigation";
     backdrop: string
  }
 
-export default function CarouselCard({img, title, sortMemo, resolution, rating, runtime, backdrop}: Info) {
+export default function CarouselCard({title, sortMemo, resolution, rating, runtime, backdrop}: Info) {
     const router = useRouter();
   return (
     <Card isFooterBlurred className="min-w-1/3 w-1/3 h-[300px] col-span-12 sm:col-span-7 hidden md:block">
@@ -25,7 +24,7 @@ export default function CarouselCard({img, title, sortMemo, resolution, rating, 
         removeWrapper
         alt={title}
         className="z-0 w-full h-full object-cover backdrop:brightness-90"
-        src={`https://image.tmdb.org/t/p/w1280${backdrop}` || ''}
+        src={`https://image.tmdb.org/t/p/w780${backdrop}` || ''}
       />
       <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
         <div className="flex flex-grow gap-2 items-center">

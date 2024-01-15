@@ -57,7 +57,7 @@ export default function TableOfMovies() {
             avatarProps={{
               style: { minWidth: "40px" },
               radius: "lg",
-              src: `https://image.tmdb.org/t/p/w500${user.poster}`,
+              src: `https://image.tmdb.org/t/p/w154${user.poster}`,
             }}
             description={`${(user.resolution, user.rating, user.runtime)}`}
             name={cellValue}

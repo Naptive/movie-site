@@ -28,7 +28,7 @@ function HistorySection() {
         className="relative -top-7 pl-[12px] bg-black max-w-screen"
       >
         <Label title={"Continue Watching"} />
-        <div className="w-full flex gap-[12px] h-[334px] overflow-x-scroll overflow-y-hidden no-scrollbar">
+        <div className="w-min flex gap-[12px] flex-row-reverse h-[334px] overflow-x-scroll overflow-y-hidden no-scrollbar">
           {storedHistory.map((items: any) => (
             <div
               key={items.title}
