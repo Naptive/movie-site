@@ -1,20 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { analytics, auth } from "@/config";
+import { auth } from "@/config";
 import {
-  ChevronLeft,
   ChevronRight,
   CircleUserRound,
   Heart,
   HeartHandshake,
   History,
   User,
-  UserRound,
 } from "lucide-react";
 import { Button, Switch } from "@nextui-org/react";
-import { logEvent } from "firebase/analytics";
 
 function MyComponent() {
   const [user, setUser] = useState<any | null>(null);
@@ -22,6 +18,7 @@ function MyComponent() {
   const router = useRouter();
 
   const handleSignOut = async () => {
+    const { signOut } = await import('firebase/auth');
     await signOut(auth)
       .then(() => {
         setUser(null);
@@ -92,11 +89,15 @@ function MyComponent() {
           Exclusive content awaits. Sign up for personalized benefits!
           </h4>
           <div className="flex gap-3">
-            <Button radius="sm" size="lg" onPress={() => {
+            <Button radius="sm" size="lg" onPress={async() => {
+              const { analytics } = await import('@/config');
+              const { logEvent } = await import('firebase/analytics');
               router.push("sign-up")
               logEvent(analytics, 'sign_up')
             }} className="bg-transparent border border-white border-solid">sign up</Button>
-            <Button radius="sm" size="lg" onPress={() => {
+            <Button radius="sm" size="lg" onPress={async () => {
+              const { analytics } = await import('@/config');
+              const { logEvent } = await import('firebase/analytics');
               router.push("sign-in")
               logEvent(analytics, 'login')
             }} className="bg-white text-black">sign in</Button>

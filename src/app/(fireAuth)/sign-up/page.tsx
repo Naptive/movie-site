@@ -1,9 +1,6 @@
 "use client";
-import { auth, db } from "@/config";
 import { Button, Input } from "@nextui-org/react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { ArrowLeft, AtSign, Eye, EyeOff, Lock, User } from "lucide-react";
+import { AtSign, Eye, EyeOff, Lock, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -12,7 +9,6 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState('')
-  const [discreet, setDiscreet] = useState(true);
   const [error, setError] = useState('')
   const router = useRouter();
   const [isVisible, setIsVisible] = React.useState(false);
@@ -20,6 +16,9 @@ function SignUp() {
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const signUp = async () => {
+    const { auth, db } = await import('@/config');
+    const { createUserWithEmailAndPassword } = await import('firebase/auth');
+    const { doc, setDoc } = await import('firebase/firestore');
     if (password === repeatPassword) {
         createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {

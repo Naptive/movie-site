@@ -32,10 +32,12 @@ function OverviewCarousel({ carousel }: any) {
     <section className="flex dark gap-5 md:my-20 relative">
       <div className="relative overflow-hidden md:w-1/3 w-full md:rounded-xl md:hidden">
         <Image
-          src={`https://image.tmdb.org/t/p/w1280${secondRandomMovie?.backdrop}` || ''}
+          src={secondRandomMovie?.backdrop !== undefined ? `https://image.tmdb.org/t/p/w780${secondRandomMovie?.backdrop}` : ''}
           alt={secondRandomMovie?.title}
-          width={2000}
-          height={2000}
+          priority
+          loading="eager"
+          width={400}
+          height={400}
           className=" object-cover shadow-inner shadow-black w-full h-[300px]"
         />
 

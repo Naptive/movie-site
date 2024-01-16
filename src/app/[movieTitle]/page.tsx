@@ -206,7 +206,7 @@ function MoviePage() {
         <Card className="py-4 dark px-3 md:h-[78vh]">
           <video
             poster={
-              `https://image.tmdb.org/t/p/w1280${movieInfo?.backdrop}` || ""
+              `https://image.tmdb.org/t/p/w1280${movieInfo?.backdrop !== undefined ? movieInfo?.backdrop : '/35z8hWuzfFUZQaYog8E9LsXW3iI.jpg'}`
             }
             id="video"
             src={`${movieInfo?.filmURL}`}

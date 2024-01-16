@@ -81,7 +81,7 @@ function RecommendedSection({ setCarousel }: any) {
           </h6>
           <Image
             quality={80}
-            src={`https://image.tmdb.org/t/p/w500${data?.poster}` || ''}
+            src={`https://image.tmdb.org/t/p/w342${data?.poster}` || ''}
             alt={data.title}
             width={250}
             height={250}

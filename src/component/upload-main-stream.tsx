@@ -1,5 +1,4 @@
 "use client";
-import { db, storage } from "@/config";
 import {
   Button,
   CircularProgress,
@@ -10,7 +9,6 @@ import {
   Input,
   Spacer,
 } from "@nextui-org/react";
-import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {  Clapperboard, CreditCard, Link } from "lucide-react";
 import React, { ChangeEvent, useState } from "react";
@@ -28,6 +26,8 @@ function UploadMainStream() {
   );
 
   async function fetchMovieDetails() {
+    const { db, storage } = await import('@/config');
+    const { doc, setDoc } = await import('firebase/firestore');
     try {
       // Fetch Movie From API
       const apiKey = "85b17866e2f13a3ff4a12a5a9a6051c2";

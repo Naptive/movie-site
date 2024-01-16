@@ -1,18 +1,17 @@
 "use client";
-import { auth, db } from "@/config";
 import { Button, Input } from "@nextui-org/react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { ArrowLeft, AtSign, Eye, EyeOff, Lock } from "lucide-react";
+import {  AtSign, Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [discreet, setDiscreet] = useState(true);
   const router = useRouter();
 
   const signIn = async () => {
+    const { auth } = await import('@/config');
+    const { signInWithEmailAndPassword } = await import('firebase/auth');
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         router.back();

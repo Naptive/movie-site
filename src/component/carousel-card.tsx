@@ -21,10 +21,11 @@ export default function CarouselCard({title, sortMemo, resolution, rating, runti
         <h4 className="text-white/90 font-medium text-xl">{title}</h4>
       </CardHeader>
       <Image
+        loading="eager"
         removeWrapper
         alt={title}
         className="z-0 w-full h-full object-cover backdrop:brightness-90"
-        src={`https://image.tmdb.org/t/p/w780${backdrop}` || ''}
+        src={backdrop !== undefined ? `https://image.tmdb.org/t/p/w780${backdrop}` : ''}
       />
       <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
         <div className="flex flex-grow gap-2 items-center">
