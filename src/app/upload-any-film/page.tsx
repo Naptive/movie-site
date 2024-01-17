@@ -6,15 +6,15 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   Spacer,
   useDisclosure,
 } from "@nextui-org/react";
-import { ArrowLeft, Plus, Search } from "lucide-react";
-import TableOfMovies from "@/component/table-of-movies";
-import UploadMainStream from "@/component/upload-main-stream";
+import {  Plus, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+const UploadMainStream = dynamic(() => import('@/component/upload-main-stream'))
+const TableOfMovies = dynamic(() => import('@/component/table-of-movies'))
 
 export default function App() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

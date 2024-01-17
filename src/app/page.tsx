@@ -1,11 +1,11 @@
 "use client";
-import OverviewCarousel from "@/component/overview-carousel";
-import HistorySection from "@/component/history-section";
-import RecommendedSection from "@/component/recommended-section";
 import Label from "@/component/label";
 import AnimatedTab from "@/component/animated-tab";
 import { useState } from "react";
-
+import CarouselOverview from "@/component/carousel-overview";
+import dynamic from "next/dynamic";
+const HistorySection = dynamic(() => import('@/component/history-section'))
+const RecommendedSection = dynamic(() => import('@/component/recommended-section'))
 interface Movie {
   title: string;
   poster: string;
@@ -16,12 +16,12 @@ interface Movie {
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<string>("myFirstId");
-  const [carousel, setCarousel] = useState<Movie[]>([]);
-
+  const [carouselData, setCarouselData] = useState<Movie[]>([]);
+ 
   return (
     <main className="min-h-screen overflow-x-hidden pb-20 md:px-7">
       <title>William || Latest For You</title>
-      <OverviewCarousel carousel={carousel} />
+      <CarouselOverview carouselData={carouselData}/>
 
       <HistorySection />
 
@@ -42,7 +42,7 @@ export default function Home() {
           id="Recommended"
           className="w-full flex flex-wrap items-center justify-between sm:justify-start gap-3 mt-5"
         >
-          <RecommendedSection setCarousel={setCarousel} />
+          <RecommendedSection setCarouselData={setCarouselData} />
         </section>
       </section>
     </main>

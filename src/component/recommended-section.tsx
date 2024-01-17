@@ -22,7 +22,7 @@ interface Movie {
 //   setCarousel?: React.Dispatch<React.SetStateAction<Movie[]>>;
 // }
 
-function RecommendedSection({ setCarousel }: any) {
+function RecommendedSection({ setCarouselData }: any) {
   const router = useRouter();
 
   const [allData, setAllData] = useState<Movie[]>([]);
@@ -38,7 +38,7 @@ function RecommendedSection({ setCarousel }: any) {
     });
 
     setAllData(data);
-    setCarousel?.(data);
+    setCarouselData(data);
     console.log('just set Carousel Data')
     
   }
