@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "axios": "^1.6.5",
     "firebase": "^10.4.0",
     "framer-motion": "^10.17.9",
     "lucide-react": "^0.308.0",

@@ -9,16 +9,21 @@ import {
   Input,
   Spacer,
 } from "@nextui-org/react";
+import axios from "axios";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import {  Clapperboard, CreditCard, Link } from "lucide-react";
+import { Clapperboard, CreditCard, Link } from "lucide-react";
 import React, { ChangeEvent, useState } from "react";
 
 function UploadMainStream() {
   const [movieId, setMovieId] = useState("");
   const [trailerLink, setTrailerLink] = useState<string>("");
-  const [loadingState, setLoadingState] = useState<any>([{ status: "Fetching", uploadVal: 0 },]);
+  const [loadingState, setLoadingState] = useState<any>([
+    { status: "Fetching", uploadVal: 0 },
+  ]);
   const [movieFile, setMovieFile] = useState<File | null>(null);
-  const [selectedKeys, setSelectedKeys] = React.useState<any>(new Set(["Quality"]));
+  const [selectedKeys, setSelectedKeys] = React.useState<any>(
+    new Set(["Quality"])
+  );
 
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
@@ -26,35 +31,42 @@ function UploadMainStream() {
   );
 
   async function fetchMovieDetails() {
-    const { db, storage } = await import('@/config');
-    const { doc, setDoc } = await import('firebase/firestore');
+    const { db, storage } = await import("@/config");
+    const { doc, setDoc } = await import("firebase/firestore");
     try {
       // Fetch Movie From API
-      const apiKey = "85b17866e2f13a3ff4a12a5a9a6051c2";
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`
-      );
-  
-      const data = await response.json();
-      console.log(data);
-  
+         const apiKey = "85b17866e2f13a3ff4a12a5a9a6051c2";
+      // const response = await fetch(
+      //   `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`
+      // );
+      // const data = await response.json();
+      let data: any;
+      axios
+        .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`).then((response) => {
+          data = response.data;
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(`Error: ${error}`);
+        });
+
       if (!movieFile) {
         alert("No File Selected");
         return;
       }
-  
+
       // Rename The File
       const lastFour = movieFile.name.substr(-4);
       const myRenamedFile = new File([movieFile], `${data?.title}${lastFour}`);
       console.log(`renamed file: ${myRenamedFile.name}`);
-  
+
       setLoadingState((prevState: any) => [
         {
           ...prevState[0],
           status: "Uploading",
         },
       ]);
-  
+
       const removeType = myRenamedFile.name.slice(0, -4);
       const cleanUpType = removeType
         .replace(/[^\w\s-]/g, "")
@@ -63,7 +75,8 @@ function UploadMainStream() {
       const uploadTask = uploadBytesResumable(storageRef, myRenamedFile);
 
       uploadTask.on("state_changed", (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setLoadingState((prevState: any) => [
           {
             ...prevState[0],
@@ -71,20 +84,20 @@ function UploadMainStream() {
           },
         ]);
       });
-  
+
       try {
         const snapshot = await uploadTask;
         const downloadURL = await getDownloadURL(snapshot.ref);
-  
+
         setLoadingState((prevState: any) => [
           {
             ...prevState[0],
             status: "Pushing",
           },
         ]);
-  
+
         console.log(downloadURL);
-  
+
         const movieDocRef = doc(db, "movies", cleanUpType);
         await setDoc(movieDocRef, {
           title: data.title,
@@ -105,7 +118,7 @@ function UploadMainStream() {
           trailer: trailerLink,
           resolution: selectedValue,
         });
-  
+
         setLoadingState((prevState: any) => [
           {
             ...prevState[0],
@@ -119,7 +132,6 @@ function UploadMainStream() {
       console.error(error);
     }
   }
-  
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -173,16 +185,15 @@ function UploadMainStream() {
                 <DropdownItem key="uhd">UHD</DropdownItem>
               </DropdownMenu>
             </Dropdown>
-            
-              <Button
-                radius="sm"
-                size="md"
-                onPress={() => fetchMovieDetails()}
-                className="bg-white text-black"
-              >
-                Upload
-              </Button>
-           
+
+            <Button
+              radius="sm"
+              size="md"
+              onPress={() => fetchMovieDetails()}
+              className="bg-white text-black"
+            >
+              Upload
+            </Button>
           </div>
         </>
       ) : (
