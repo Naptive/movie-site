@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import Nav from "@/component/nav";
 import { Providers } from "./providers";
 import { Metadata } from "next";
+import Script from "next/script";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -11,9 +12,9 @@ const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 export const metadata: Metadata = {
-  title: 'WilliamFlix.com',
-  description: 'Latest Movies At Your Finger Tips',
-}
+  title: "WilliamFlix.com",
+  description: "Latest Movies At Your Finger Tips",
+};
 export default function RootLayout({
   children,
 }: {
@@ -26,6 +27,10 @@ export default function RootLayout({
           <Nav />
           {children}
           <BottomNav />
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7915291545340615"
+          />
         </Providers>
       </body>
     </html>
