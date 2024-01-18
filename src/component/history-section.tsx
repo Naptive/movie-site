@@ -1,6 +1,4 @@
 "use client";
-import { analytics } from "@/config";
-import { logEvent } from "firebase/analytics";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Label from "./label";
@@ -35,15 +33,14 @@ function HistorySection() {
               key={items.title}
               className="max-h-[306px] sm:min-w-[150px] sm:max-w-[150px] min-w-[170px] max-w-[170px] relative cursor-pointer"
               onClick={() => {
-                logEvent(analytics, "history");
                 router.push(
                   `${items.title.replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}`
                 );
               }}
             >
-              <h6 className="absolute top-2 left-2 bg-white text-black rounded-md px-2 text-[11px] py-[2px]">
+              <span className="absolute top-2 left-2 bg-white text-black rounded-md px-2 text-[11px] py-[2px]">
                 {items.resolution}
-              </h6>
+              </span>
               <Image
                 src={`https://image.tmdb.org/t/p/w342${items?.poster}` || ""}
                 alt={items?.title}

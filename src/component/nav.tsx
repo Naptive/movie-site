@@ -16,9 +16,15 @@ function Nav() {
     <header className="md:fixed absolute top-0 z-40 left-0 right-0 px-[22px] md:px-7 py-2 md:py-3 bg-transparent md:bg-black/60 md:backdrop-blur md:backdrop-saturate-150 ">
       <nav className="w-full h-full flex items-center justify-between gap-3 dark">
         {path === "/" ? (
-          <h1 onClick={() => router.refresh()} className="hidden md:block text-xl cursor-pointer">William</h1>
+          <h1
+            onClick={() => router.refresh()}
+            className="hidden md:block text-xl cursor-pointer"
+          >
+            William
+          </h1>
         ) : (
           <button
+            aria-label="Back button"
             onClick={() => router.back()}
             className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
           >
@@ -26,22 +32,29 @@ function Nav() {
           </button>
         )}
         <Spacer />
-        {!(path === "/account" || path === "/sign-in" || path === "/sign-up") && (
+        {!(
+          path === "/account" ||
+          path === "/sign-in" ||
+          path === "/sign-up"
+        ) && (
           <div className="flex gap-3">
             {" "}
             <button
+              aria-label="Go to upload any film page"
               onClick={() => router.push("upload-any-film")}
               className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
             >
               <UploadCloud className="md:text-xl text-2xl" />
             </button>
             <button
+              aria-label="Go to search page"
               onClick={() => router.push("search")}
               className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
             >
               <Search className="md:text-xl text-2xl" />
             </button>
             <button
+              aria-label="Go to account page"
               onClick={() => router.push("account")}
               className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
             >

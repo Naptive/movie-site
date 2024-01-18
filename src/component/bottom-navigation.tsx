@@ -1,7 +1,6 @@
 "use client";
-
 import { motion } from "framer-motion";
-import { Home, MessageCircleMore, User } from "lucide-react";
+import { Home, User } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -68,6 +67,7 @@ function BottomNav() {
       <section className="h-[48px] md:w-[400px] flex items-center justify-between mx-[12px] px-2 rounded-lg bg-[#131313] w-[80%] overflow-hidden z-30">
         {tabs.map((tab) => (
           <button
+            aria-label={`Go to ${tab.id === '/' ? 'home' : 'account'}`}
             key={tab.id}
             onClick={(e) => {
               e.preventDefault();

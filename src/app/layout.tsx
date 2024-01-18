@@ -4,7 +4,6 @@ import { Poppins } from "next/font/google";
 import Nav from "@/component/nav";
 import { Providers } from "./providers";
 import { Metadata } from "next";
-import Script from "next/script";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,10 +26,6 @@ export default function RootLayout({
           <Nav />
           {children}
           <BottomNav />
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7915291545340615"
-          />
         </Providers>
       </body>
     </html>

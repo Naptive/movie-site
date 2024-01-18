@@ -9,7 +9,6 @@ import {
   Input,
   Spacer,
 } from "@nextui-org/react";
-import axios from "axios";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { Clapperboard, CreditCard, Link } from "lucide-react";
 import React, { ChangeEvent, useState } from "react";
@@ -34,21 +33,11 @@ function UploadMainStream() {
     const { db, storage } = await import("@/config");
     const { doc, setDoc } = await import("firebase/firestore");
     try {
-      // Fetch Movie From API
-         const apiKey = "85b17866e2f13a3ff4a12a5a9a6051c2";
-      // const response = await fetch(
-      //   `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`
-      // );
-      // const data = await response.json();
-      let data: any;
-      axios
-        .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`).then((response) => {
-          data = response.data;
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(`Error: ${error}`);
-        });
+      const apiKey = "85b17866e2f13a3ff4a12a5a9a6051c2";
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`
+      );
+      const data = await response.json();
 
       if (!movieFile) {
         alert("No File Selected");

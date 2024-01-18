@@ -89,17 +89,11 @@ function MyComponent() {
           Exclusive content awaits. Sign up for personalized benefits!
           </h4>
           <div className="flex gap-3">
-            <Button radius="sm" size="lg" onPress={async() => {
-              const { analytics } = await import('@/config');
-              const { logEvent } = await import('firebase/analytics');
+            <Button radius="sm" size="lg" onPress={() => {
               router.push("sign-up")
-              logEvent(analytics, 'sign_up')
             }} className="bg-transparent border border-white border-solid">sign up</Button>
-            <Button radius="sm" size="lg" onPress={async () => {
-              const { analytics } = await import('@/config');
-              const { logEvent } = await import('firebase/analytics');
+            <Button radius="sm" size="lg" onPress={() => {
               router.push("sign-in")
-              logEvent(analytics, 'login')
             }} className="bg-white text-black">sign in</Button>
           </div>
         </div>

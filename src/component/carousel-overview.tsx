@@ -4,16 +4,18 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-const CarouselCard = dynamic(() => import('@/component/carousel-card'))
-function CarouselOverview({ carouselData }: any) {
+const CarouselCard = dynamic(() => import("@/component/carousel-card"));
+
+function CarouselOverview({ allData }: any) {
   const [secondRandomMovie, setSecondRandomMovie] = useState<any>();
 
   const router = useRouter();
 
   useEffect(() => {
-    // Function to select a random movie
+    const maxIndex = allData?.length - 1;
+
     function selectRandomMovie() {
-      return carouselData[Math.floor(Math.random() * carouselData.length)];
+      return allData[Math.floor(Math.random() * (maxIndex + 1))];
     }
 
     setSecondRandomMovie(selectRandomMovie());
@@ -24,9 +26,9 @@ function CarouselOverview({ carouselData }: any) {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, [carouselData]);
+}, [allData]);
 
-  let firstThreeElements = carouselData.slice(1, 4);
+  let firstThreeElements = allData?.slice(1, 4);
 
   return (
     <section className="flex dark gap-5 md:my-20 relative">
@@ -69,12 +71,12 @@ function CarouselOverview({ carouselData }: any) {
           </button>
         </section>
       </div>
-      {firstThreeElements.map((randomize: any) => (
+      {firstThreeElements?.map((randomize: any) => (
         <CarouselCard
           key={randomize?.rating}
           title={randomize?.title}
           sortMemo={randomize?.overview}
-          random={carouselData}
+          random={allData}
           resolution={randomize?.resolution}
           rating={randomize?.rating}
           runtime={randomize?.runtime}

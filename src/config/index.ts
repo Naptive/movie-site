@@ -25,18 +25,3 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth: any = getAuth(app);
 export const storage = getStorage(app);
-export let perf: any
-export let analytics: any
-
-if (typeof window !== "undefined") { 
- perf = getPerformance(app);
-}
-
-isSupported().then((supportStatus) => {
-  if (supportStatus) {
-    analytics = getAnalytics(app)
-  } else {
-  }
- });
-
-
