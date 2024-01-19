@@ -13,11 +13,7 @@ import { useEffect, useState } from "react";
 import {
   doc,
   getDoc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
 } from "firebase/firestore";
-import { auth, db } from "@/config";
 import RecommendedSection from "@/component/recommended-section";
 import Label from "@/component/label";
 import {
@@ -30,6 +26,7 @@ import {
   Tab,
   Tabs,
 } from "@nextui-org/react";
+import { db } from "@/config";
 export const dynamic = 'force-static'
 interface Info {
   title: string;
@@ -74,101 +71,101 @@ function MoviePage() {
   }, []);
 
 
-  useEffect(() => {
-    const unsubscribe = async () => {
-      const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
-      const docSnap = await getDoc(docRef);
-      console.log('hello from unsubscribe');
+  // useEffect(() => {
+  //   const unsubscribe = async () => {
+  //     const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
+  //     const docSnap = await getDoc(docRef);
+  //     console.log('hello from unsubscribe');
       
 
-      if (docSnap.exists()) {
-        const likedMovies = docSnap.data().likedMovies;
-        const isMovieLiked = likedMovies.includes(movieInfo?.title);
+  //     if (docSnap.exists()) {
+  //       const likedMovies = docSnap.data().likedMovies;
+  //       const isMovieLiked = likedMovies.includes(movieInfo?.title);
 
-        if (isMovieLiked) {
-          const button: any = document.getElementById("like");
-          button.querySelector("svg").setAttribute("fill", "white");
-          button.style.color = "white";
-        }
-      }
-    };
-    unsubscribe();
-  });
+  //       if (isMovieLiked) {
+  //         const button: any = document.getElementById("like");
+  //         button.querySelector("svg").setAttribute("fill", "white");
+  //         button.style.color = "white";
+  //       }
+  //     }
+  //   };
+  //   unsubscribe();
+  // });
 
-  const checkIfLiked = async () => {
-    const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
-    const docSnap = await getDoc(docRef);
-    console.log('run check');
+  // const checkIfLiked = async () => {
+  //   const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
+  //   const docSnap = await getDoc(docRef);
+  //   console.log('run check');
     
-    if (docSnap.exists()) {
-      const likedMovies = docSnap.data().likedMovies;
-      const isMovieLiked = likedMovies.includes(movieInfo?.title);
+  //   if (docSnap.exists()) {
+  //     const likedMovies = docSnap.data().likedMovies;
+  //     const isMovieLiked = likedMovies.includes(movieInfo?.title);
 
-      if (isMovieLiked) {
-        const button: any = document.getElementById("like");
-        button.querySelector("svg").setAttribute("fill", "transparent");
-        button.style.color = "white";
-        await updateDoc(docRef, {
-          likedMovies: arrayRemove(movieInfo?.title),
-        }).then(() => console.log("removed from db"));
-      } else {
-        const button: any = document.getElementById("like");
-        button.querySelector("svg").setAttribute("fill", "white");
-        button.style.color = "white";
-        await updateDoc(docRef, {
-          likedMovies: arrayUnion(movieInfo?.title),
-        }).then(() => console.log("added like to database"));
-      }
-    }
-  };
+  //     if (isMovieLiked) {
+  //       const button: any = document.getElementById("like");
+  //       button.querySelector("svg").setAttribute("fill", "transparent");
+  //       button.style.color = "white";
+  //       await updateDoc(docRef, {
+  //         likedMovies: arrayRemove(movieInfo?.title),
+  //       }).then(() => console.log("removed from db"));
+  //     } else {
+  //       const button: any = document.getElementById("like");
+  //       button.querySelector("svg").setAttribute("fill", "white");
+  //       button.style.color = "white";
+  //       await updateDoc(docRef, {
+  //         likedMovies: arrayUnion(movieInfo?.title),
+  //       }).then(() => console.log("added like to database"));
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    const unsubscribe = async () => {
-      const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
-      const docSnap = await getDoc(docRef);
-      console.log('hello from unsubscribe');
+  // useEffect(() => {
+  //   const unsubscribe = async () => {
+  //     const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
+  //     const docSnap = await getDoc(docRef);
+  //     console.log('hello from unsubscribe');
       
 
-      if (docSnap.exists()) {
-        const dislikedMovies = docSnap.data().dislikedMovies;
-        const isMovieLiked = dislikedMovies.includes(movieInfo?.title);
+  //     if (docSnap.exists()) {
+  //       const dislikedMovies = docSnap.data().dislikedMovies;
+  //       const isMovieLiked = dislikedMovies.includes(movieInfo?.title);
 
-        if (isMovieLiked) {
-          const button: any = document.getElementById("dislike");
-          button.querySelector("svg").setAttribute("fill", "white");
-          button.style.color = "white";
-        }
-      }
-    };
-    unsubscribe();
-  });
+  //       if (isMovieLiked) {
+  //         const button: any = document.getElementById("dislike");
+  //         button.querySelector("svg").setAttribute("fill", "white");
+  //         button.style.color = "white";
+  //       }
+  //     }
+  //   };
+  //   unsubscribe();
+  // });
 
-  const checkIfDisliked = async () => {
-    const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
-    const docSnap = await getDoc(docRef);
-    console.log('run check');
+  // const checkIfDisliked = async () => {
+  //   const docRef = doc(db, "accountData", `${auth?.currentUser?.email}`);
+  //   const docSnap = await getDoc(docRef);
+  //   console.log('run check');
     
-    if (docSnap.exists()) {
-      const dislikedMovies = docSnap.data().dislikedMovies;
-      const isMovieLiked = dislikedMovies.includes(movieInfo?.title);
+  //   if (docSnap.exists()) {
+  //     const dislikedMovies = docSnap.data().dislikedMovies;
+  //     const isMovieLiked = dislikedMovies.includes(movieInfo?.title);
 
-      if (isMovieLiked) {
-        const button: any = document.getElementById("dislike");
-        button.querySelector("svg").setAttribute("fill", "transparent");
-        button.style.color = "white";
-        await updateDoc(docRef, {
-          dislikedMovies: arrayRemove(movieInfo?.title),
-        }).then(() => console.log("removed from db"));
-      } else {
-        const button: any = document.getElementById("dislike");
-        button.querySelector("svg").setAttribute("fill", "white");
-        button.style.color = "white";
-        await updateDoc(docRef, {
-          dislikedMovies: arrayUnion(movieInfo?.title),
-        }).then(() => console.log("added like to database"));
-      }
-    }
-  };
+  //     if (isMovieLiked) {
+  //       const button: any = document.getElementById("dislike");
+  //       button.querySelector("svg").setAttribute("fill", "transparent");
+  //       button.style.color = "white";
+  //       await updateDoc(docRef, {
+  //         dislikedMovies: arrayRemove(movieInfo?.title),
+  //       }).then(() => console.log("removed from db"));
+  //     } else {
+  //       const button: any = document.getElementById("dislike");
+  //       button.querySelector("svg").setAttribute("fill", "white");
+  //       button.style.color = "white";
+  //       await updateDoc(docRef, {
+  //         dislikedMovies: arrayUnion(movieInfo?.title),
+  //       }).then(() => console.log("added like to database"));
+  //     }
+  //   }
+  // };
 
   if (!movieInfo) {
     return (<main className=" min-h-screen z-50 bg-black min-w-screen flex items-center justify-center">
@@ -220,7 +217,7 @@ function MoviePage() {
         <Card className="bg-default-100 dark px-5 w-full md:w-min justify-evenly md:justify-start py-3 mt-3 flex gap-5 flex-row ">
         <button
           id="like"
-          onClick={() => checkIfLiked()}
+          onClick={() => {}}
           className="w-min h-min"
         >
           <ThumbsUp size={20}/>
@@ -228,7 +225,7 @@ function MoviePage() {
 
         <button
           id="dislike"
-          onClick={() => checkIfDisliked()}
+          onClick={() => {}}
           className="w-min h-min"
         >
           <ThumbsDown size={20}/>

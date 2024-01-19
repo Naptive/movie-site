@@ -53,13 +53,6 @@ function Nav() {
             >
               <Search className="md:text-xl text-2xl" />
             </button>
-            <button
-              aria-label="Go to account page"
-              onClick={() => router.push("account")}
-              className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
-            >
-              <User className="md:text-xl text-2xl" />
-            </button>
           </div>
         )}
       </nav>
