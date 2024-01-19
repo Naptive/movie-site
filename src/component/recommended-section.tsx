@@ -7,6 +7,7 @@ import React from "react";
 function RecommendedSection({ allData }: any) {
   const router = useRouter();
 
+ if (allData) {
   return (
     <>
       {allData.map((data: any) => (
@@ -55,6 +56,7 @@ function RecommendedSection({ allData }: any) {
       ))}
     </>
   );
+ } 
 }
 
 export default RecommendedSection;

@@ -3,6 +3,7 @@ import {
   AlertCircle,
   Bookmark,
   Download,
+  MessageSquareMore,
   Share2,
   ThumbsDown,
   ThumbsUp,
@@ -29,7 +30,7 @@ import {
   Tab,
   Tabs,
 } from "@nextui-org/react";
-
+export const dynamic = 'force-static'
 interface Info {
   title: string;
   backdrop: string;
@@ -42,7 +43,7 @@ interface Info {
   resolution: string;
   overview: string;
   releaseDate: string;
-  genres: any;
+  genres: any[];
   language: string;
   runtime: number;
   poster: string;
@@ -273,15 +274,15 @@ function MoviePage() {
             >
               <Card style={{ maxWidth: "max-content" }}>
                 <CardBody >
-                  {movieInfo.runtime < 60 ? (
+                {movieInfo.runtime < 60 ? (
                     <section className="flex flex-wrap gap-3">
-                      {dat.map((item) => (
+                       {dat !== undefined && dat.map((item) => (
                         <Card style={{ minWidth: "300px" }} key={item.id}>
                           <CardBody>
                             <p>{item.title}</p>
                           </CardBody>
                         </Card>
-                      ))}
+                      ))} 
                     </section>
                   ) : (
                     <>
@@ -310,7 +311,7 @@ function MoviePage() {
             <Tab key="comment" title="Comment">
               <Card style={{ maxWidth: "max-content" }}>
                 <CardBody>
-                  {/* <Input
+                  { <Input
                     size="sm"
                     type="text"
                     placeholder="Say Something..."
@@ -318,7 +319,7 @@ function MoviePage() {
                       <MessageSquareMore color="#838383" size={20} />
                     }
                     onChange={(e) => {}}
-                  /> */}
+                  /> }
                 </CardBody>
               </Card>
             </Tab>
@@ -353,11 +354,11 @@ function MoviePage() {
           <small className="flex text-default-500 pt-2">
             Genre:
             <div className="flex flex-wrap gap-x-2 pl-2">
-            {movieInfo.genres.map((genre: any) => (
+             {movieInfo.genres !== undefined && movieInfo?.genres?.map((genre: any) => (
               <span className="h-min" key={genre.id}>
                 {genre.name || "N/A"}
               </span>
-            ))}
+            ))} 
             </div>
           </small>
           <small className="text-default-500">
