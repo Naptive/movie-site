@@ -31,7 +31,7 @@ function CarouselOverview({ allData }: any) {
   let firstThreeElements = allData?.slice(1, 4);
 
   return (
-    <section className="flex dark gap-5 md:my-20 relative">
+    <section className="flex dark gap-5 md:my-20 relative md:min-h-[300px]">
       <div className="relative overflow-hidden md:w-1/3 w-full md:rounded-xl md:hidden">
         <Image
           src={
