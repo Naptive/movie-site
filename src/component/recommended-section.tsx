@@ -32,7 +32,7 @@ function RecommendedSection({ allData }: any) {
             );
           }}
           key={data.title}
-          className="max-h-[306px] sm:w-[150px] relative line-clamp-2 cursor-pointer w-[48%] "
+          className="max-h-[306px] dark sm:w-[150px] relative line-clamp-2 cursor-pointer w-[48%]"
         >
           <span
             className={`bg-white absolute top-2 left-2 text-black rounded-md px-2 text-[11px] py-[1px]`}

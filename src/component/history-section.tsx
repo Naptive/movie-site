@@ -30,7 +30,7 @@ function HistorySection() {
           {storedHistory.map((items: any) => (
             <div
               key={items.title}
-              className="max-h-[306px] sm:min-w-[150px] sm:max-w-[150px] min-w-[170px] max-w-[170px] relative cursor-pointer"
+              className="max-h-[306px] dark sm:min-w-[150px] sm:max-w-[150px] min-w-[170px] max-w-[170px] relative cursor-pointer"
               onClick={() => {
                 router.push(
                   `/${items.title.replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}`
