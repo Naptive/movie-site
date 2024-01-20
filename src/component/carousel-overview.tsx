@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
+import {Image} from "@nextui-org/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
@@ -40,11 +40,10 @@ function CarouselOverview({ allData }: any) {
               : ""
           }
           alt={secondRandomMovie?.title}
-          priority
           loading="eager"
           width={400}
           height={400}
-          className=" object-cover shadow-inner shadow-black w-full h-[300px]"
+          className=" object-cover z-0 shadow-inner shadow-black w-full h-[300px]"
         />
 
         <div className="w-full absolute top-0 h-[300px] bg-gradient-to-t from-5% from-black to-transparent"></div>

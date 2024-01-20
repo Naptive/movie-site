@@ -12,7 +12,7 @@ function BottomNav() {
 
   let tabs = [
     { id: "/", label: <Home /> },
-    { id: "index/search", label:  <Search/> },
+    { id: "/index/search", label:  <Search/> },
   ];
 
  useEffect(() => {
@@ -54,7 +54,7 @@ function BottomNav() {
   return (
     <div
       className={`${
-        path === "/" ? 'block': path === "/search" ? 'block' : 'hidden'
+        path === "/" ? 'block': path === "/index/search" ? 'block' : 'hidden'
       } fixed w-full flex items-center animate-all duration-500 justify-center md:hidden ${
         isNavVisible ? "animate-show" : "animate-hide"
       }`}
@@ -68,7 +68,7 @@ function BottomNav() {
             onClick={(e) => {
               e.preventDefault();
               path === "/" && router.push("index/search");
-              path === "/search" && router.push("/");
+              path === "/index/search" && router.push("/");
             }}
             className={`w-1/2 relative text-white h-[80%] flex items-center justify-center`}
           >
