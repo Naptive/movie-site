@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import {Image} from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -28,7 +28,7 @@ function RecommendedSection({ allData }: any) {
             }
             
             router.push(
-              `${data.title.replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}`
+              `/${data.title.replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}`
             );
           }}
           key={data.title}
@@ -40,7 +40,6 @@ function RecommendedSection({ allData }: any) {
             {data.resolution}
           </span>
           <Image
-            quality={80}
             src={`https://image.tmdb.org/t/p/w342${data?.poster}` || ""}
             alt={data.title}
             width={250}

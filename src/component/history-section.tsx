@@ -1,8 +1,7 @@
 "use client";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Label from "./label";
-
+import {Image} from "@nextui-org/react";
 function HistorySection() {
   let storedHistoryString;
   let storedHistory: any = [];
@@ -34,7 +33,7 @@ function HistorySection() {
               className="max-h-[306px] sm:min-w-[150px] sm:max-w-[150px] min-w-[170px] max-w-[170px] relative cursor-pointer"
               onClick={() => {
                 router.push(
-                  `${items.title.replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}`
+                  `/${items.title.replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}`
                 );
               }}
             >

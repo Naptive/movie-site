@@ -41,7 +41,7 @@ export default function CarouselCard({title, sortMemo, resolution, rating, runti
           </div>
         </div>
         <Button radius="full" size="sm" onPress={() => router.push(
-              `${title.replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}`
+              `/${title.replace(/[^\w\s-]/g, "").replace(/\s+/g, "-")}`
             )}>Watch</Button>
       </CardFooter>
     </Card>

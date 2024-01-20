@@ -9,6 +9,7 @@ function Search() {
 
   return (
     <main className="min-h-screen">
+      <title>WilliamFlix.com || Find your movie</title>
       <header className="fixed justify-between top-[0px] w-full p-4 flex items-center gap-3 bg-black">
         <button
           onClick={() => router.back()}

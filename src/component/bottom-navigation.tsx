@@ -11,7 +11,7 @@ function BottomNav() {
   const router = useRouter();
 
   let tabs = [
-    { id: "/", label: <Home /> },
+    { id: "/watch/home", label: <Home /> },
     { id: "/index/search", label:  <Search/> },
   ];
 
@@ -54,7 +54,7 @@ function BottomNav() {
   return (
     <div
       className={`${
-        path === "/" ? 'block': path === "/index/search" ? 'block' : 'hidden'
+        path === "/watch/home" ? 'block': path === "/index/search" ? 'block' : 'hidden'
       } fixed w-full flex items-center animate-all duration-500 justify-center md:hidden ${
         isNavVisible ? "animate-show" : "animate-hide"
       }`}
@@ -63,12 +63,12 @@ function BottomNav() {
       <section className="h-[48px] md:w-[400px] flex items-center justify-between mx-[12px] px-2 rounded-lg bg-[#131313] w-[80%] overflow-hidden z-30">
         {tabs.map((tab) => (
           <button
-            aria-label={`Go to ${tab.id === '/' ? 'home' : 'index/search'}`}
+            aria-label={`Go to ${tab.id === '/watch/home' ? 'home' : 'index/search'}`}
             key={tab.id}
             onClick={(e) => {
               e.preventDefault();
-              path === "/" && router.push("index/search");
-              path === "/index/search" && router.push("/");
+              path === "/watch/home" && router.push("/index/search");
+              path === "/index/search" && router.push("/watch/home");
             }}
             className={`w-1/2 relative text-white h-[80%] flex items-center justify-center`}
           >
