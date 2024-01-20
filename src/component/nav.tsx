@@ -6,7 +6,7 @@ import React from "react";
 
 function Nav() {
   const router = useRouter();
-  const path = usePathname();
+  const path: string = usePathname();
 
   if (path === "/search") {
     return null;
@@ -23,20 +23,19 @@ function Nav() {
             William
           </h1>
         ) : (
-          <button
-            aria-label="Back button"
-            onClick={() => router.back()}
-            className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
-          >
-            <ArrowLeft />
-          </button>
+          path !== "/index/search" && (
+            <button
+              aria-label="Back button"
+              onClick={() => router.back()}
+              className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
+            >
+              <ArrowLeft />
+            </button>
+          )
         )}
+
         <Spacer />
-        {!(
-          path === "/account" ||
-          path === "/sign-in" ||
-          path === "/sign-up"
-        ) && (
+        {path !== "/index/search" && (
           <div className="flex gap-3">
             {" "}
             <button
@@ -48,7 +47,7 @@ function Nav() {
             </button>
             <button
               aria-label="Go to search page"
-              onClick={() => router.push("search")}
+              onClick={() => router.push("index/search")}
               className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
             >
               <Search className="md:text-xl text-2xl" />

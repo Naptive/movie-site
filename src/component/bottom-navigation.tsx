@@ -12,7 +12,7 @@ function BottomNav() {
 
   let tabs = [
     { id: "/", label: <Home /> },
-    { id: "/search", label:  <Search/> },
+    { id: "index/search", label:  <Search/> },
   ];
 
  useEffect(() => {
@@ -63,11 +63,11 @@ function BottomNav() {
       <section className="h-[48px] md:w-[400px] flex items-center justify-between mx-[12px] px-2 rounded-lg bg-[#131313] w-[80%] overflow-hidden z-30">
         {tabs.map((tab) => (
           <button
-            aria-label={`Go to ${tab.id === '/' ? 'home' : 'search'}`}
+            aria-label={`Go to ${tab.id === '/' ? 'home' : 'index/search'}`}
             key={tab.id}
             onClick={(e) => {
               e.preventDefault();
-              path === "/" && router.push("/search");
+              path === "/" && router.push("index/search");
               path === "/search" && router.push("/");
             }}
             className={`w-1/2 relative text-white h-[80%] flex items-center justify-center`}
