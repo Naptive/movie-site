@@ -41,7 +41,7 @@ function Nav() {
             {" "}
             <button
               aria-label="Go to upload any film page"
-              onClick={() => router.push("upload-any-film")}
+              onClick={() => {}}
               className="w-[50px] z-20 h-[50px] md:w-[40px] md:h-[40px] bg-default-100 dark rounded-xl flex justify-center items-center"
             >
               <UploadCloud className="md:text-xl text-2xl" />
