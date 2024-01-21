@@ -37,7 +37,7 @@ function HistorySection() {
                 );
               }}
             >
-              <span className="absolute top-2 left-2 bg-white text-black rounded-md px-2 text-[11px] py-[2px]">
+              <span className="absolute z-10 top-2 left-2 bg-white text-black rounded-md px-2 text-[11px] py-[2px]">
                 {items.resolution}
               </span>
               <Image
@@ -45,7 +45,7 @@ function HistorySection() {
                 alt={items?.title}
                 width={250}
                 height={250}
-                className="w-full h-[236px] object-cover rounded-t-xl"
+                className="w-full z-0 h-[236px] object-cover rounded-t-xl"
               />
               <div className=" h-[78px] bg-[#131313c2] md:first-letter:bg-[] rounded-b-xl p-3">
                 <h1 className="text-[18px] line-clamp-2 md:text-[15px]">

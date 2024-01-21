@@ -54,8 +54,8 @@ function BottomNav() {
   return (
     <div
       className={`${
-        path === "/watch/home" ? 'block': path === "/index/search" ? 'block' : 'hidden'
-      } fixed w-full flex items-center animate-all duration-500 justify-center md:hidden ${
+        path === "/watch/home" ? 'block md:hidden': path === "/index/search" ? 'block md:hidden' : 'hidden'
+      } fixed z-40 w-full flex items-center animate-all duration-500 justify-center ${
         isNavVisible ? "animate-show" : "animate-hide"
       }`}
       style={{ bottom: isNavVisible ? "0.5rem" : "-5rem" }}

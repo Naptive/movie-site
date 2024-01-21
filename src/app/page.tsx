@@ -25,7 +25,7 @@ function Main() {
         label="Search"
         classNames={{ base: "w-[80%] max-w-[300px]" }}
       />
-      <Button radius="md" color="default" variant="flat" onPress={() => router.push('/watch/home')} className="px-4">
+      <Button color="default" variant="flat" onPress={() => router.push('/watch/home')} className="px-4 rounded-md">
         Enter homepage
       </Button>
     </main>

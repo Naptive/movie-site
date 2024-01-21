@@ -1,42 +1,123 @@
 "use client";
-import { ArrowLeft,  SearchIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-
+import { db } from "@/config";
+import React, { useEffect, useState } from "react";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  getDocs,
+} from "firebase/firestore";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Input,
+  Spacer,
+} from "@nextui-org/react";
+import RecommendedSection from "@/component/recommended-section";
+import { ChevronUp } from "lucide-react";
 function Search() {
-  const [search, setSearch] = useState('')
-  const router = useRouter();
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
+  const [resultsTwo, setResultsTwo] = useState([]);
+  const [selectedKeys, setSelectedKeys] = React.useState<any>(
+    new Set(["Type"])
+  );
+  const selectedValue: string = React.useMemo(
+    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
+    [selectedKeys]
+  );
+
+  useEffect(() => {
+    if (search) {
+      const q = query(
+        collection(db, "movies"),
+        where(
+          "title",
+          ">=",
+          search
+            .toLowerCase()
+            .split(" ")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")
+        )
+      );
+
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const newResults: any = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setResults(newResults);
+      });
+
+      return unsubscribe;
+    } else {
+      setResults([]);
+    }
+  }, [search]);
+
+  const fetchFilm = async () => {
+    const q = query(collection(db, "movies"));
+    const querySnapshot = await getDocs(q);
+
+    const data: any = await Promise.all(
+      querySnapshot.docs.map((doc) => doc.data())
+    );
+
+    setResultsTwo(data);
+    console.log("just set Carousel Data");
+  };
+
+  useEffect(() => {
+    fetchFilm();
+  }, []);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen md:px-7 pt-20 space-y-5 px-3">
       <title>WilliamFlix.com || Find your movie</title>
-      <header className="fixed justify-between top-[0px] w-full p-4 flex items-center gap-3 bg-black">
-        <button
-          onClick={() => router.back()}
-          className="z-30 w-[50px] h-[50px] md:w-[40px] md:h-[40px] bg-white rounded-xl flex justify-center items-center"
-        >
-          <ArrowLeft color="black" />
-        </button>
 
-        
-        <div className="flex items-center flex-1 min-h-[50px] px-4 gap-4 min-w-min rounded-xl bg-[#131313]">
-        <SearchIcon color='#838383' size={20}/>
-        <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            type="text"
-            placeholder="Search"
-            className="py-3 w-[80%] h-full bg-inherit focus:outline-none text-[#838383] placeholder:text-[#838383]"
-          />
-        </div>
-        <button
-          onClick={() => router.back()}
-          className="z-30 w-[50px] h-[50px] md:w-[40px] md:h-[40px] bg-[#131313] rounded-xl flex justify-center items-center"
-        >
-          <SearchIcon color="white" />
-        </button>
-      
-      </header>
+      <div className="flex justify-end items-center dark">
+        <Dropdown className="dark">
+          <DropdownTrigger>
+            <Button
+              variant="bordered"
+              className="capitalize h-[48px] text-foreground-500 dark"
+              endContent={<ChevronUp size={15} />}
+            >
+              {selectedValue}
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu
+            aria-label="Single selection example"
+            variant="flat"
+            disallowEmptySelection
+            selectionMode="single"
+            selectedKeys={selectedKeys}
+            onSelectionChange={setSelectedKeys}
+          >
+            <DropdownItem key="movie">Movie</DropdownItem>
+            <DropdownItem key="series">Series</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        <Spacer />
+        <Input
+          onChange={(e) => setSearch(e.target.value)}
+          size="sm"
+          type="text"
+          placeholder="Search"
+          classNames={{ base: "w-[80%] max-w-[300px]" }}
+        />
+      </div>
+      <section
+        id="Recommended"
+        className="w-full flex flex-wrap items-center justify-between sm:justify-start gap-3"
+      >
+        <RecommendedSection allData={search === "" ? resultsTwo : results} />
+      </section>
     </main>
   );
 }

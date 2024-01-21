@@ -35,7 +35,7 @@ function RecommendedSection({ allData }: any) {
           className="max-h-[306px] dark sm:w-[150px] relative line-clamp-2 cursor-pointer w-[48%]"
         >
           <span
-            className={`bg-white absolute top-2 left-2 text-black rounded-md px-2 text-[11px] py-[1px]`}
+            className={`bg-white absolute z-10 top-2 left-2 text-black rounded-md px-2 text-[11px] py-[1px]`}
           >
             {data.resolution}
           </span>
@@ -44,7 +44,7 @@ function RecommendedSection({ allData }: any) {
             alt={data.title}
             width={250}
             height={250}
-            className="min-w-full h-[236px] object-cover rounded-t-xl"
+            className="min-w-full h-[236px] object-cover rounded-t-xl z-0"
           />
           <div className="bg-[#131313c2] rounded-b-xl p-3 py-3 min-h-[78px]">
             <h1 className="text-[18px] line-clamp-2  md:text-[15px]">

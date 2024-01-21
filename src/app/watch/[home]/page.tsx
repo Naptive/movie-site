@@ -27,7 +27,7 @@ export default function Home() {
     const data: any = await Promise.all(querySnapshot.docs.map(doc => doc.data()));
 
     setAllData(data);
-    console.log('just set Carousel Data');
+    console.log('just set home Data');
   }
 
   useEffect(() => {

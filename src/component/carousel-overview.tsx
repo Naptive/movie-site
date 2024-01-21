@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import {Image} from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
@@ -26,7 +26,7 @@ function CarouselOverview({ allData }: any) {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
-}, [allData]);
+  }, [allData]);
 
   let firstThreeElements = allData?.slice(1, 4);
 
@@ -40,6 +40,7 @@ function CarouselOverview({ allData }: any) {
               : ""
           }
           alt={secondRandomMovie?.title}
+          radius="none"
           loading="eager"
           width={400}
           height={400}
