@@ -36,7 +36,7 @@ function CarouselOverview({ allData }: any) {
         <Image
           src={
             secondRandomMovie?.backdrop !== undefined
-              ? `https://image.tmdb.org/t/p/w780${secondRandomMovie?.backdrop}`
+              ? `https://image.tmdb.org/t/p/w300${secondRandomMovie?.backdrop}`
               : ""
           }
           alt={secondRandomMovie?.title}

@@ -38,7 +38,7 @@ export default function CarouselCard({
         className="z-0 w-full h-full object-cover backdrop:brightness-90"
         src={
           backdrop !== undefined
-            ? `https://image.tmdb.org/t/p/w300${backdrop}`
+            ? `https://image.tmdb.org/t/p/w780${backdrop}`
             : ""
         }
       />
