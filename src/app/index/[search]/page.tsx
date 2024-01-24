@@ -60,7 +60,17 @@ function Search() {
     }
   }, [search]);
 
+
+
   const fetchFilm = async () => {
+    const storedData = sessionStorage.getItem('films');
+    if (storedData) {
+        // Parse the stored data and set it
+        const dataFromCache = JSON.parse(storedData);
+        setResultsTwo(dataFromCache);
+        console.log('Data loaded from session storage');
+        return;
+    }
     const q = query(collection(db, "movies"));
     const querySnapshot = await getDocs(q);
 
